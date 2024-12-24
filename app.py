@@ -27,7 +27,7 @@ def root_webhook():
         response_message = f"Hai inviato: {text}"
         url = f"https://api.telegram.org/bot{TelegramToken}/sendMessage"
         requests.post(url, json={
-            "chat_id": chat_id,
+            "chat_id": "-4697401047", ## prima era chat_id,
             "text": response_message
         })
 
