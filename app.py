@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 AirtableAPIKey = os.getenv("patmwWf2nhxbqK0l4.ff8ce9c4a82d639ceda9bb3f690f1b8d8663a339dd25f0626b9011c02b7016e7")
 TelegramToken = os.getenv("8152616899:AAFdwcDFkiDoxzWz22ziGqhI70mR1EieHzo")
-TelegramChatID = os.getenv("-4697401047"  # the bartener group è invece "-1001213886944")
+TelegramChatID = os.getenv("-4697401047"(  # the bartener group è invece "-1001213886944"
 
 
 # Endpoint principale
