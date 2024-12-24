@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Chiavi API e configurazioni
 AirtableAPIKey = "patmwWf2nhxbqK0l4.ff8ce9c4a82d639ceda9bb3f690f1b8d8663a339dd25f0626b9011c02b7016e7"
 TelegramToken = "8152616899:AAFdwcDFkiDoxzWz22ziGqhI70mR1EieHzo"
-TelegramChatID = "-1001213886944"
+TelegramChatID = "-4697401047" # the bartener group è inveece "-1001213886944"
 
 @app.route("/", methods=["GET", "POST"])
 def home():
