@@ -48,6 +48,9 @@ def offerte_lavoro():
 def webhook():
     data = request.get_json()
 
+    # Aggiungi un log per debug
+    print("Richiesta ricevuta:", data)
+
     # Controlla che il messaggio sia valido
     if "message" in data:
         chat_id = data["message"]["chat"]["id"]
@@ -56,10 +59,11 @@ def webhook():
         # Risponde al messaggio
         response_message = f"Hai inviato: {text}"
         url = f"https://api.telegram.org/bot{TelegramToken}/sendMessage"
-        requests.post(url, json={
+        response = requests.post(url, json={
             "chat_id": chat_id,
             "text": response_message
         })
+        print("Risposta Telegram:", response.json())
 
     return jsonify({"ok": True})
 
@@ -72,4 +76,4 @@ def setup_webhook():
     return jsonify(response.json())
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=8000, debug=True)
