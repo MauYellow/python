@@ -6,11 +6,12 @@ app = Flask(__name__)
 # Chiavi API e configurazioni
 AirtableAPIKey = "patmwWf2nhxbqK0l4.ff8ce9c4a82d639ceda9bb3f690f1b8d8663a339dd25f0626b9011c02b7016e7"
 TelegramToken = "8152616899:AAFdwcDFkiDoxzWz22ziGqhI70mR1EieHzo"
-TelegramChatID = "-4697401047" # the bartener group è inveece "-1001213886944"
+TelegramChatID = "-4697401047"  # the bartener group è invece "-1001213886944"
 
 
+# Endpoint principale
 @app.route("/", methods=["POST"])
-def webhook():
+def root_webhook():
     data = request.get_json()
 
     if "message" in data:
@@ -39,6 +40,7 @@ def send_message(message):
     response = requests.post(url, json=data)
     return jsonify(response.json())
 
+
 # Endpoint per ottenere offerte di lavoro
 @app.route("/offerte_lavoro")
 def offerte_lavoro():
@@ -56,12 +58,13 @@ def offerte_lavoro():
         figura = f"Figura ricercata: {fields.get('Figura ricercata', 'N/A')}"
         singola_offerta = zona + " - " + figura
         annunci.append(singola_offerta)
-    
+
     return jsonify(annunci)
+
 
 # Endpoint per gestire il webhook di Telegram
 @app.route(f"/webhook/{TelegramToken}", methods=["POST"])
-def webhook():
+def telegram_webhook():
     data = request.get_json()
 
     # Aggiungi un log per debug
@@ -83,6 +86,7 @@ def webhook():
 
     return jsonify({"ok": True})
 
+
 # Configurazione del webhook (da chiamare separatamente)
 @app.route("/setup_webhook", methods=["GET"])
 def setup_webhook():
@@ -90,6 +94,7 @@ def setup_webhook():
     url = f"https://api.telegram.org/bot{TelegramToken}/setWebhook?url={webhook_url}"
     response = requests.get(url)
     return jsonify(response.json())
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))  # Usa 8000 come valore di default
