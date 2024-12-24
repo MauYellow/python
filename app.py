@@ -8,11 +8,25 @@ AirtableAPIKey = "patmwWf2nhxbqK0l4.ff8ce9c4a82d639ceda9bb3f690f1b8d8663a339dd25
 TelegramToken = "8152616899:AAFdwcDFkiDoxzWz22ziGqhI70mR1EieHzo"
 TelegramChatID = "-4697401047" # the bartener group è inveece "-1001213886944"
 
-@app.route("/", methods=["GET", "POST"])
-def home():
-    if request.method == "POST":
-        return jsonify({"ok": False, "error": "Wrong endpoint. Use /webhook/<TelegramToken>"}), 404
-    return "L'applicazione è finalmente in esecuzione!"
+
+@app.route("/", methods=["POST"])
+def webhook():
+    data = request.get_json()
+
+    if "message" in data:
+        chat_id = data["message"]["chat"]["id"]
+        text = data["message"].get("text", "")
+
+        # Risponde al messaggio
+        response_message = f"Hai inviato: {text}"
+        url = f"https://api.telegram.org/bot{TelegramToken}/sendMessage"
+        requests.post(url, json={
+            "chat_id": chat_id,
+            "text": response_message
+        })
+
+    return jsonify({"ok": True})
+
 
 # Endpoint per inviare un messaggio manualmente
 @app.route("/send_message/<message>")
