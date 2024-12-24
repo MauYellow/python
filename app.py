@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-import requests
+import requests, os
 
 app = Flask(__name__)
 
@@ -92,4 +92,5 @@ def setup_webhook():
     return jsonify(response.json())
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    port = int(os.environ.get("PORT", 8000))  # Usa 8000 come valore di default
+    app.run(host="0.0.0.0", port=port, debug=True)
