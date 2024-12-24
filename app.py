@@ -1,12 +1,17 @@
+#Funziona bene, ma manda il messaggio in tutti i gruppi. Bisogna settarlo solo su un gruppo e solo se il messaggio è /list o simili
+#Prima di aggiungere os.getenv("") funzionava
+
 from flask import Flask, jsonify, request
 import requests, os
 
 app = Flask(__name__)
 
 # Chiavi API e configurazioni
-AirtableAPIKey = "patmwWf2nhxbqK0l4.ff8ce9c4a82d639ceda9bb3f690f1b8d8663a339dd25f0626b9011c02b7016e7"
-TelegramToken = "8152616899:AAFdwcDFkiDoxzWz22ziGqhI70mR1EieHzo"
-TelegramChatID = "-4697401047"  # the bartener group è invece "-1001213886944"
+# Prima di mettere os.getenv funzionava bene
+
+AirtableAPIKey = os.getenv("patmwWf2nhxbqK0l4.ff8ce9c4a82d639ceda9bb3f690f1b8d8663a339dd25f0626b9011c02b7016e7")
+TelegramToken = os.getenv("8152616899:AAFdwcDFkiDoxzWz22ziGqhI70mR1EieHzo")
+TelegramChatID = os.getenv("-4697401047"  # the bartener group è invece "-1001213886944")
 
 
 # Endpoint principale
